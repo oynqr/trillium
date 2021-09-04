@@ -154,8 +154,7 @@
 <h3 id="askama"><a class="header" href="#askama">Askama</a></h3>
 <p>Askama is a jinja-based template engine that preprocesses templates at
 compile time, resulting in efficient and type-safe templates that are
-compiled into the application binary. We recommend this approach as a
-default. Here's how it looks:</p>
+compiled into the application binary. Here's how it looks:</p>
 <p>Given the following file in <code>(cargo root)/templates/examples/hello.html</code>,</p>
 <pre><code class="language-django">Hello, {{ name }}!
 </code></pre>
@@ -173,6 +172,13 @@ fn main() {
 }
 </code></pre>
 <p><a href="https://docs.trillium.rs/trillium_askama/index.html">rustdocs (main)</a></p>
+<h3 id="ructe"><a class="header" href="#ructe">Ructe</a></h3>
+<p>Ructe is a compile-time typed template system similar to askama, but using a build script instead of macros.</p>
+<ul>
+<li>crate: https://crates.io/crates/trillium-ructe</li>
+<li>repository: https://github.com/prabirshrestha/trillium-ructe</li>
+<li>docs: https://docs.rs/trillium-ructe/latest/trillium_ructe/</li>
+</ul>
 <h3 id="tera"><a class="header" href="#tera">Tera</a></h3>
 <p>Tera offers runtime templating. Trillium's tera integration provides an interface very similar to <code>phoenix</code> or <code>rails</code>, with the notion of <code>assigns</code> being set on the conn prior to render.</p>
 <p>Given the following file in the same directory as main.rs (examples in this case),</p>
@@ -207,13 +213,6 @@ fn main() {
 }
 </code></pre>
 <p><a href="https://docs.trillium.rs/trillium_handlebars/index.html">rustdocs (main)</a></p>
-<h3 id="ructe"><a class="header" href="#ructe">Ructe</a></h3>
-<p>Community-contributed crate with an unconventional approach to error handling</p>
-<ul>
-<li>crate: https://crates.io/crates/trillium-ructe</li>
-<li>repository: https://github.com/prabirshrestha/trillium-ructe</li>
-<li>docs: https://docs.rs/trillium-ructe/0.1.1/trillium_ructe/</li>
-</ul>
 
                     </main>
 
