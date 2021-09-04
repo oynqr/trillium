@@ -170,9 +170,7 @@ fn user_id(conn: &amp;Conn, _color: bool) -&gt; &amp;'static str {
 pub fn main() {
     trillium_smol::run((
         State::new(User(&quot;jacob&quot;)),
-        Logger::new()
-            .with_formatter(apache_combined(&quot;-&quot;, user_id))
-            .with_target(Target::Stdout),
+        Logger::new().with_formatter(apache_combined(&quot;-&quot;, user_id)),
         &quot;ok&quot;,
     ));
 }
