@@ -849,9 +849,10 @@ pub fn main() {
 <pre><code class="language-rust noplaypen">use trillium_static_compiled::{include_dir, StaticCompiledHandler};
 pub fn main() {
     #[cfg(unix)]
-    trillium_smol::run(
-        StaticCompiledHandler::new(include_dir!(&quot;./examples/files&quot;)).with_index_file(&quot;lib.rs&quot;),
-    );
+    trillium_smol::run((
+        trillium_logger::Logger::new(),
+        StaticCompiledHandler::new(include_dir!(&quot;./examples/files&quot;)).with_index_file(&quot;index.html&quot;),
+    ));
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="websocket-support"><a class="header" href="#websocket-support">WebSocket support</a></h2>
