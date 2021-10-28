@@ -162,11 +162,12 @@ pub fn main() {}
 <p><a href="https://docs.trillium.rs/trillium_static_compiled/index.html">rustdocs (main)</a></p>
 <pre><code class="language-rust noplaypen">#[cfg(unix)]
 pub fn main() {
-    use trillium_static_compiled::{include_dir, StaticCompiledHandler};
+    use trillium_static_compiled::static_compiled;
 
     trillium_smol::run((
         trillium_logger::Logger::new(),
-        StaticCompiledHandler::new(include_dir!(&quot;./examples/files&quot;)).with_index_file(&quot;index.html&quot;),
+        trillium_caching_headers::CachingHeaders::new(),
+        static_compiled!(&quot;examples/files&quot;).with_index_file(&quot;index.html&quot;),
     ));
 }
 
