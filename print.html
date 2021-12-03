@@ -855,18 +855,17 @@ pub fn main() {}
 <div style="break-before: page; page-break-before: always;"></div><h2 id="websocket-support"><a class="header" href="#websocket-support">WebSocket support</a></h2>
 <p><a href="https://docs.trillium.rs/trillium_websockets/index.html">rustdocs (main)</a></p>
 <pre><code class="language-rust noplaypen">use futures_util::StreamExt;
-use trillium_websockets::{Message, WebSocket};
+use trillium_websockets::{websocket, Message, WebSocketConn};
+
+async fn websocket_handler(mut conn: WebSocketConn) {
+    while let Some(Ok(Message::Text(input))) = conn.next().await {
+        conn.send_string(format!(&quot;received your message: {}&quot;, &amp;input))
+            .await;
+    }
+}
 
 pub fn main() {
-    env_logger::init();
-
-    trillium_smol::run(WebSocket::new(|mut websocket| async move {
-        while let Some(Ok(Message::Text(input))) = websocket.next().await {
-            websocket
-                .send_string(format!(&quot;received your message: {}&quot;, &amp;input))
-                .await;
-        }
-    }));
+    trillium_smol::run(websocket(websocket_handler));
 }
 </code></pre>
 <blockquote>
