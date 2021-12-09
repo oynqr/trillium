@@ -393,7 +393,7 @@ contain the full details for all of the things you can do with a conn.</p>
 <p>In general, because you'll be returning <code>Conn</code> from handlers, it
 supports a chainable (fluent) interface for setting properties, like:</p>
 <pre><code class="language-rust noplaypen">conn.with_status(202)
-    .with_header((&quot;content-type&quot;, &quot;application/something-custom&quot;))
+    .with_header(&quot;content-type&quot;, &quot;application/something-custom&quot;)
     .with_body(&quot;this is my custom body&quot;)
 </code></pre>
 <h2 id="accessing-http-request-properties"><a class="header" href="#accessing-http-request-properties">Accessing http request properties</a></h2>
