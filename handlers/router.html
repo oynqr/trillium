@@ -157,13 +157,20 @@ opportunity for innovation and exploration.</p>
 like http://localhost:8000/greet/earth with &quot;hello earth&quot; and
 http://localhost:8000/greet/mars with &quot;hello mars&quot; and responds to
 http://localhost:8000 with &quot;hello everyone&quot;</p>
-<pre><code class="language-rust noplaypen">use trillium::Conn;
+<pre><code class="language-rust noplaypen">use trillium::{Conn, Init};
 use trillium_router::{Router, RouterConnExt};
 
 pub fn main() {
     env_logger::init();
     trillium_smol::run(
         Router::new()
+            .get(
+                &quot;/stuff&quot;,
+                Init::new(|info| async move {
+                    dbg!(&amp;info);
+                    &quot;hellO&quot;
+                }),
+            )
             .get(&quot;/&quot;, |conn: Conn| async move { conn.ok(&quot;hello everyone&quot;) })
             .get(&quot;/hello/:planet&quot;, |conn: Conn| async move {
                 let planet = conn.param(&quot;planet&quot;).unwrap();
