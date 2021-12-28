@@ -167,7 +167,7 @@ pub fn main() {
     trillium_smol::run((
         trillium_logger::Logger::new(),
         trillium_caching_headers::CachingHeaders::new(),
-        static_compiled!(&quot;examples/files&quot;).with_index_file(&quot;index.html&quot;),
+        static_compiled!(&quot;$CARGO_MANIFEST_DIR/examples/files&quot;).with_index_file(&quot;index.html&quot;),
     ));
 }
 
