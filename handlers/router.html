@@ -161,7 +161,6 @@ http://localhost:8000 with &quot;hello everyone&quot;</p>
 use trillium_router::{Router, RouterConnExt};
 
 pub fn main() {
-    env_logger::init();
     trillium_smol::run(
         Router::new()
             .get(&quot;/&quot;, |conn: Conn| async move { conn.ok(&quot;hello everyone&quot;) })
