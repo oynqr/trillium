@@ -49,17 +49,17 @@ pub trait Server: Sized + Send + Sync + 'static {
             return listener;
         }
 
-        use std::os::unix::prelude::FromRawFd;
+        use listenfd::ListenFd;
         let host = config.host();
+        let mut listenfd = ListenFd::from_env();
         if host.starts_with(|c| c == '/' || c == '.' || c == '~') {
             Self::listener_from_unix(std::os::unix::net::UnixListener::bind(host).unwrap())
+        } else if let Some(listener) = listenfd.take_unix_listener(0).ok().flatten() {
+            Self::listener_from_unix(listener)
         } else {
-            let tcp_listener = if let Some(fd) = std::env::var("LISTEN_FD")
-                .ok()
-                .and_then(|fd| fd.parse().ok())
+            let tcp_listener = if let Some(listener) = listenfd.take_tcp_listener(0).ok().flatten()
             {
-                log::debug!("using fd {} from LISTEN_FD", fd);
-                unsafe { std::net::TcpListener::from_raw_fd(fd) }
+                listener
             } else {
                 std::net::TcpListener::bind((host, config.port())).unwrap()
             };
