@@ -32,6 +32,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
@@ -173,7 +174,7 @@ pub fn main() {
             .get(&quot;/&quot;, |conn: Conn| async move { conn.ok(&quot;hello everyone&quot;) })
             .get(&quot;/hello/:planet&quot;, |conn: Conn| async move {
                 let planet = conn.param(&quot;planet&quot;).unwrap();
-                let response_body = format!(&quot;hello {}&quot;, planet);
+                let response_body = format!(&quot;hello {planet}&quot;);
                 conn.ok(response_body)
             }),
     );
@@ -285,5 +286,6 @@ pub fn main() {
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>
